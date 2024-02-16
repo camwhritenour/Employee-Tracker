@@ -51,7 +51,7 @@ const main = () => {
 };
 
 const viewAllEmployees = () => {
-    const sql = `SELECT employees.employee_id`
+    const sql = `SELECT * FROM employees`;
     connection.query(sql, (err, res) => {
         if (err) throw err;
     console.log(chalk.green.bold(`====================================================================================`));
@@ -69,7 +69,16 @@ const addEmployee = () => {
 }
 
 const viewAllRoles = () => {
-
+    const sql = `SELECT * FROM roles`;
+    connection.query(sql, (err, res) => {
+        if (err) throw err;
+    console.log(chalk.green.bold(`====================================================================================`));
+    console.log(`                              ` + chalk.magentaBright.bold(`Current Roles:`));
+    console.log(chalk.green.bold(`====================================================================================`));
+    console.table(res);
+    console.log(chalk.green.bold(`====================================================================================`));
+    main();
+    });
 }
 
 const addRole = () => {
@@ -77,7 +86,16 @@ const addRole = () => {
 }
 
 const viewAllDepartments = () => {
-
+    const sql = `SELECT * FROM departments`;
+    connection.query(sql, (err, res) => {
+        if (err) throw err;
+    console.log(chalk.green.bold(`====================================================================================`));
+    console.log(`                              ` + chalk.magentaBright.bold(`Current Departments:`));
+    console.log(chalk.green.bold(`====================================================================================`));
+    console.table(res);
+    console.log(chalk.green.bold(`====================================================================================`));
+    main();
+    });
 }
 
 const addDepartment = () => {
