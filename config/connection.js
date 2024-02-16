@@ -1,9 +1,12 @@
 // Get the client
-import mysql from 'mysql2/promise';
+const mysql = require('mysql2');
 
 // Create the connection to database
-const connection = await mysql.createConnection({
+const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
+  password: '124875',
   database: 'employees_db',
 });
+
+module.exports = connection;

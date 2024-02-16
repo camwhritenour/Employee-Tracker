@@ -3,55 +3,23 @@ CREATE DATABASE employees_db;
 
 USE employees_db;
 
-CREATE TABLE department 
-(
-  id INT AUTO_INCREMENT,
-  department_name VARCHAR(30) NOT NULL,
-  PRIMARY KEY (id)
+CREATE TABLE departments (
+  department_id INT AUTO_INCREMENT PRIMARY KEY,
+  department_name VARCHAR(30) NOT NULL
 );
-
-INSERT INTO department (department_name)
-VALUES ('Sales'), 
-    ('Service'), 
-    ('Managment'), 
-    ('Engineering');
-
-CREATE TABLE role (
-  id INT AUTO_INCREMENT,
+CREATE TABLE roles (
+  role_id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(30) NOT NULL,
-  salary DECIMAL,
+  salary DECIMAL(10, 2),
   department_id INT,
-  FOREIGN KEY (department_id)
-  REFERENCES department(id)
-  ON DELETE SET NULL,
-  PRIMARY KEY (id)
+  FOREIGN KEY (department_id) REFERENCES Departments(department_id)
 );
-
-INSERT INTO role (title, salary, department_id)
-VALUES ('Head Sales', 100000, 1),
-    ('Junior Sales', 80000, 1),
-    ('Full Stack Developer', 100000, 4),
-    ('Junior Developer', 60000, 4),
-    ('Customer Representative', 80000, 2),
-    ('Project Manager', 120000, 3),
-    ('Sales Manager', 110000, 3);
-
-CREATE TABLE employee (
-  id INT AUTO_INCREMENT,
+CREATE TABLE employees (
+  employee_id INT AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
   role_id INT,
   manager_id INT,
-  FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE SET NULL,
-  FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE SET NULL,
-  PRIMARY KEY (id)
+  FOREIGN KEY (role_id) REFERENCES Roles(role_id)
 );
 
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ('Jack', 'Ripper', 6, NULL),
-    ('John', 'Appleseed', 1, 7),
-    ('Jane', 'Tomatoseed', 4, 6),
-    ('Jim', 'Kramer', 5, NULL),
-    ('Eugene', 'Krabs', 2, 7),
-    ('Spongebob', 'Squarepants', 3, 6),
-    ('Sandy', 'Cheeks', 7, NULL);
